@@ -858,19 +858,12 @@ endef
 TARGET_DEVICES += xiaomi_mir3g-v2
 
 define Device/xiaomi_mir3p
-  BLOCKSIZE := 128k
-  PAGESIZE := 2048
-  KERNEL_SIZE:= 4096k
-  UBINIZE_OPTS := -E 5
-  IMAGE_SIZE := 255488k
-  DEVICE_VENDOR := Xiaomi
-  DEVICE_MODEL := Mi Router 3 Pro
-  IMAGES += factory.bin
-  IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
-  IMAGE/factory.bin := append-kernel | pad-to $$(KERNEL_SIZE) | append-ubi | \
-	check-size $$$$(IMAGE_SIZE)
-  DEVICE_PACKAGES := kmod-mt7615e kmod-usb3 kmod-usb-ledtrig-usbport \
-	wpad-openssl uboot-envtools
+       DTS := MIR3P
+       IMAGE_SIZE := $(ralink_default_fw_size_32M)
+       DEVICE_TITLE := Xiaomi Mi Router 3 Pro
+       DEVICE_PACKAGES := \
+        kmod-mt7615e kmod-usb3 kmod-usb-ledtrig-usbport wpad-basic \
+	uboot-envtools
 endef
 TARGET_DEVICES += xiaomi_mir3p
 
